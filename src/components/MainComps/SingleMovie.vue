@@ -123,7 +123,7 @@ export default{
 <style lang="scss" scoped>
 
 #singleMovie {
-    padding: 0 .625rem;
+    padding: 0 5px;
     overflow: hidden;
     cursor: pointer;
     margin-bottom: 30px;

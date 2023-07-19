@@ -7,10 +7,20 @@ export default{
         Nav
     },
     data() {
-    return {
-        store
+        return {
+            store,
+            searchFocus: false
+        }
+    },
+    methods: {
+        searchDisplay() {
+            this.searchFocus = true;
+        },
+        searchNotDisplay() {
+            this.searchFocus = false;
+            this.store.title = '';
+        }
     }
-  }
 }
 
 </script>
@@ -46,13 +56,15 @@ export default{
                 <!-- RIGHT COLUMN -->
                 <div class="col-auto">
 
-                    <form action="" @submit.prevent="$emit('search')">
+                        <input type="text" v-model="store.title" 
+                        @keyup.enter="$emit('search')"
+                        @blur="searchNotDisplay()"
+                        :class="{'active': searchFocus}">
 
-                        <input type="text" v-model="store.title">
-
-                        <button>Search</button>
-
-                    </form>
+                        <span
+                        @click="searchDisplay()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
 
                 </div>
 
@@ -78,22 +90,28 @@ header {
         }
     }
 
-    form {
 
-        input {
-            all: unset;
-            border: 1px solid white;
-            padding-left: 5px;
-            background-color: white;
-        }
+    input {
+        all: unset;
+        border: 1px solid white;
+        padding-left: 5px;
+        background-color: white;
+        margin-right: 10px;
+        display: none;
 
-        button {
-            border: none;
-            border-left: 2px solid black;
-            background-color: white;
-            font-weight: 500;
+        &.active {
+            display: inline;
         }
     }
+
+    span {
+        color: white;
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+
+
+    
 }
 
 </style>
