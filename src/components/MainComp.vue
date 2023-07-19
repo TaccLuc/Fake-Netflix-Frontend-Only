@@ -21,27 +21,17 @@ export default{
 
         <div class="row justify-content-center">
 
-          <div v-if="store.movies.length != 0">
-
-            <SingleMovie 
+          <SingleMovie 
             v-for="(singleMovie, i) in store.movies" :key="i"
             :singleMovie="singleMovie"
             :title="singleMovie.title"
-            :ogTitle="singleMovie.original_title"
-            :poster="singleMovie.poster_path"/>
+            :ogTitle="singleMovie.original_title"/>
 
-          </div>
-
-          <div v-if="store.series.length != 0">
-
-            <SingleMovie
-            v-for="(singleMovie, i) in store.series" :key="i"
-            :singleMovie="singleMovie"
-            :title="singleMovie.name"
-            :ogTitle="singleMovie.original_name"
-            :poster="singleMovie.poster_path"/>
-
-          </div>
+          <SingleMovie
+          v-for="(singleMovie, i) in store.series" :key="i"
+          :singleMovie="singleMovie"
+          :title="singleMovie.name"
+          :ogTitle="singleMovie.original_name"/>
 
         </div>
 
@@ -51,5 +41,13 @@ export default{
 </template>
 
 <style lang="scss" scoped>
+
+main {
+  background-color: black;
+  padding: 30px 0;
+  min-height: calc(100vh - 70px);
+  color: white;
+
+}
 
 </style>

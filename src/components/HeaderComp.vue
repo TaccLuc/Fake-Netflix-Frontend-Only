@@ -68,6 +68,7 @@ export default{
 header {
     background-color: black;
     padding: 20px 0;
+    height: 70px;
 
     #logoContainer {
         width: 100px;

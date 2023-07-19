@@ -13,40 +13,34 @@ export default{
   props: {
       singleMovie: Object,
       title: String,
-      ogTitle: String,
-      poster: String
-    },
-    mounted() {
-      () => {
-          console.log(poster)
-      }
+      ogTitle: String
     },
   computed: {
     language() {
-        const lang = this.singleMovie.original_language;
-        if ( lang == 'en') {
+        const movieLang = this.singleMovie.original_language;
+        if ( movieLang == 'en') {
             return 'gb';
         }
-        else if (lang == 'ja') {
+        else if (movieLang == 'ja') {
             return 'jp';
         }
-        else if(lang == 'it' &&
-        lang == 'fr' &&
-        lang == 'nl' &&
-        lang == 'de' &&
-        lang == 'es' &&
-        lang == 'vi' &&
-        lang == 'no' &&
-        lang == 'cn' &&
-        lang == 'th' &&
-        lang == 'fi' &&
-        lang == 'pt' &&
-        lang == 'pl' &&
-        lang == 'sv' &&
-        lang == 'tr' &&
-        lang == 'ro' &&
-        lang == 'et' &&
-        lang == 'ru') {
+        else if(movieLang == 'it' ||
+        movieLang == 'fr' ||
+        movieLang == 'nl' ||
+        movieLang == 'de' ||
+        movieLang == 'es' ||
+        movieLang == 'vi' ||
+        movieLang == 'no' ||
+        movieLang == 'cn' ||
+        movieLang == 'th' ||
+        movieLang == 'fi' ||
+        movieLang == 'pt' ||
+        movieLang == 'pl' ||
+        movieLang == 'sv' ||
+        movieLang == 'tr' ||
+        movieLang == 'ro' ||
+        movieLang == 'et' ||
+        movieLang == 'ru') {
             return this.singleMovie.original_language;
         }
         else {
@@ -67,47 +61,58 @@ export default{
 
 <template>
 
-    <div class="mb-5">
+    <div id="singleMovie" class="col-3 position-relative"
+    v-if="singleMovie.length != 0">
         
         <div>
-            <img v-if="poster != null" :src="`https://image.tmdb.org/t/p/w342${poster}`" :alt="title">
+            <img v-if="singleMovie.poster_path != null" :src="`https://image.tmdb.org/t/p/w342${singleMovie.poster_path}`" :alt="title">
             <div v-else>
                 IMAGE NOT FOUND
             </div>
         </div>
         
-        <div>
+        <div class="d-flex align-items-end">
 
-            <h3>
+            <div>
 
-                {{ title }}
+                <h3 id="title">
 
-            </h3>
+                    {{ title }}
 
-            <h3>
+                </h3>
 
-                {{ ogTitle }}   
+                <h3 v-if="title != ogTitle" id="ogTitle">
 
-            </h3>
+                    {{ ogTitle }}   
 
-            <h3>
+                </h3>
 
-                <span v-if="lang" :class="`fi fi-${language}`"></span>
+                <h3 id="language">
 
-                <span v-else>
+                    <span v-if="lang" :class="`fi fi-${language}`"></span>
 
-                    {{ singleMovie.original_language }}
+                    <span v-else>
 
-                </span>
+                        {{ singleMovie.original_language }}
 
-            </h3>
+                    </span>
 
-            <h3>
+                </h3>
 
-                <i v-for="i in vote" :key="i" class="fa-solid fa-star"></i>
-                <i v-for="j in (5 - vote)" :key="j" class="fa-regular fa-star"></i>
+                <h3 id="rating">
 
-            </h3>
+                    <i v-for="i in vote" :key="i" class="fa-solid fa-star"></i>
+                    <i v-for="j in (5 - vote)" :key="j" class="fa-regular fa-star"></i>
+
+                </h3>
+
+                <h3 id="overview">
+
+                    {{ singleMovie.overview }}
+
+                </h3>
+
+            </div>
 
         </div>
 
@@ -117,12 +122,65 @@ export default{
 
 <style lang="scss" scoped>
 
-h3 {
-    margin: 0;
-    font-size: 1rem;
+#singleMovie {
+    padding: 0 .625rem;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 30px;
 
-    span {
-        text-transform: capitalize;
+    &:hover>div:last-of-type {
+        transform: translateY(0%);
+    }
+
+    > div:first-of-type {
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    
+    > div:last-of-type {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        padding: 0 20px;
+        vertical-align: bottom;
+        transform: translateY(100%);
+        transition: 0.3s ease-in-out;
+        background-color: rgba(0, 0, 0, 0.7);
+        
+
+        h3 {
+        margin-bottom: 10px;
+        font-size: 16px;
+
+            &#title,
+            &#ogTitle {
+                text-transform: capitalize;
+                font-size: 1.2rem;
+                font-weight: bolder;
+            }
+
+            &#language {
+                text-transform: uppercase;
+            }
+
+            &#rating {
+                color: white;
+            }
+            
+            &#overview {
+                font-size: 0.8rem;
+                max-height: 200px;
+                overflow: hidden;
+                padding-bottom: 50px;
+            }
+        }
     }
 }
 
