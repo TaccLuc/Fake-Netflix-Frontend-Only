@@ -66,9 +66,9 @@ export default{
         
         <div>
             <img v-if="singleMovie.poster_path != null" :src="`https://image.tmdb.org/t/p/w342${singleMovie.poster_path}`" :alt="title">
-            <div v-else>
-                IMAGE NOT FOUND
-            </div>
+
+            <img v-else src="../../assets/img/posternotfound.png" alt="Not Found">
+            
         </div>
         
         <div class="d-flex align-items-end">
