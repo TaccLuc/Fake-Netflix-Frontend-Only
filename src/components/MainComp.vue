@@ -25,6 +25,10 @@ export default{
           v-for="(singleMovie, i) in store.movies" :key="i"
           :singleMovie="singleMovie"/>
 
+          <SingleMovie 
+          v-for="(singleMovie, i) in store.series" :key="i"
+          :singleMovie="singleMovie"/>
+
         </div>
 
       </div>

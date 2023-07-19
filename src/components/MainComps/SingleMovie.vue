@@ -50,11 +50,14 @@ export default{
 
     <div class="mb-5">
         <h3>
-            {{ singleMovie.title }}
+             {{ singleMovie.title }}
+             {{ singleMovie.name }}
         </h3>
 
         <h3>
             {{ singleMovie.original_title }}
+            {{ singleMovie.original_name }}
+            
         </h3>
 
         <h3>
