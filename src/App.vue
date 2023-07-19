@@ -15,25 +15,33 @@ export default{
     }
   },
   methods: {
-    movieFetcher() {
+    moviesFetcher() {
       axios
-        .get('https://api.themoviedb.org/3/search/movie',{
-          params: {
-            api_key: '8e45067f588e5032df8823d8cceacc66',
-            query: this.store.title
+      .get('https://api.themoviedb.org/3/search/movie',{
+        params: {
+          api_key: '8e45067f588e5032df8823d8cceacc66',
+          query: this.store.title
         }})
         .then((response)=> {
           this.store.movies = response.data.results;
         });
+      },
+
+    seriesFetcher() {
       axios
-        .get('https://api.themoviedb.org/3/search/tv', {
-          params: {
-            api_key: '8e45067f588e5032df8823d8cceacc66',
-            query: this.store.title
-          }})
-          .then((response)=> {
+      .get('https://api.themoviedb.org/3/search/tv', {
+        params: {
+          api_key: '8e45067f588e5032df8823d8cceacc66',
+          query: this.store.title
+        }})
+        .then((response)=> {
           this.store.series = response.data.results;
         });
+      },
+      
+    searcher() {
+      this.moviesFetcher()
+      this.seriesFetcher()
     }
   }
 }
@@ -43,7 +51,7 @@ export default{
 <template>
 
   <HeaderComp
-  @search="movieFetcher()" />
+  @search="searcher()" />
 
   <MainComp />
 
@@ -51,5 +59,6 @@ export default{
 
 <style lang="scss">
 @use "assets/scss/main.scss";
+
 
 </style>

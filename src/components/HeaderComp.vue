@@ -1,8 +1,12 @@
 <script>
 import { store } from '../store'
+import Nav from './HeaderComps/Nav.vue'
 
 export default{
-  data() {
+    components: {
+        Nav
+    },
+    data() {
     return {
         store
     }
@@ -18,11 +22,29 @@ export default{
 
             <div class="row d-flex justify-content-between">
 
-                <div class="col">
-                    LOGO
+                <!-- LEFT COLUMN -->
+                <div class="col-auto">
+                    
+                    <div class="d-flex align-items-center">
+
+                        <div id="logoContainer">
+
+                            <img src="../assets/img/logo.png" alt="Logo">
+
+                        </div>
+
+                        <div>
+
+                            <Nav />   
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="col">
+                <!-- RIGHT COLUMN -->
+                <div class="col-auto">
 
                     <form action="" @submit.prevent="$emit('search')">
 
@@ -42,5 +64,35 @@ export default{
 </template>
 
 <style lang="scss" scoped>
+
+header {
+    background-color: black;
+    padding: 20px 0;
+
+    #logoContainer {
+        width: 100px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    form {
+
+        input {
+            all: unset;
+            border: 1px solid white;
+            padding-left: 5px;
+            background-color: white;
+        }
+
+        button {
+            border: none;
+            border-left: 2px solid black;
+            background-color: white;
+            font-weight: 500;
+        }
+    }
+}
 
 </style>
