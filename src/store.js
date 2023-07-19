@@ -3,5 +3,6 @@ import {reactive} from 'vue'
 export const store = reactive ({
     movies: [],
     series: [],
-    title: ''
+    title: '',
+    loaded: false
 });

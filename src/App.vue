@@ -40,8 +40,10 @@ export default{
       },
       
     searcher() {
+      this.store.loaded = false;
       this.moviesFetcher()
       this.seriesFetcher()
+      this.store.loaded = true;
     }
   }
 }

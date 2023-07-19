@@ -19,7 +19,20 @@ export default{
     
       <div class="container">
 
-        <div class="row justify-content-center">
+        <div  id="mainBG" 
+        v-if="store.movies.length == 0 && store.series.length == 0 && store.loaded == false">
+
+          <img src="../assets/img/main_bg.jpg" alt="Main BG">
+
+        </div>
+
+        <div v-else-if="store.movies.length == 0 && store.series.length == 0 && store.loaded == true">
+          <h2>
+            Search has no results
+          </h2>
+        </div>
+
+        <div v-else class="row justify-content-center">
 
           <SingleMovie 
             v-for="(singleMovie, i) in store.movies" :key="i"
@@ -48,6 +61,16 @@ main {
   min-height: calc(100vh - 70px);
   color: white;
 
+  #mainBG {
+    width: 100%;
+    height: calc(100vh - 150px);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
 }
 
 </style>
