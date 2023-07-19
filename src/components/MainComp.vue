@@ -1,13 +1,13 @@
 <script>
 import SingleMovie from './MainComps/SingleMovie.vue'
-
+import { store } from '../store'
 export default{
   components: {
     SingleMovie
   },
   data() {
     return {
-
+      store
     }
   }
 }
@@ -21,7 +21,9 @@ export default{
 
         <div class="row justify-content-center">
 
-          <SingleMovie />
+          <SingleMovie 
+          v-for="(singleMovie, i) in store.movies" :key="i"
+          :singleMovie="singleMovie"/>
 
         </div>
 

@@ -6,6 +6,9 @@ export default{
     return {
         store
     }
+  },
+  props: {
+    singleMovie: Object
   }
 }
 
@@ -15,19 +18,19 @@ export default{
 
     <div>
         <h3>
-            {{ store.movies.title }}
+            {{ singleMovie.title }}
         </h3>
 
         <h3>
-            TITOLO ORIGINALE
+            {{ singleMovie.original_title }}
         </h3>
 
         <h3>
-            LINGUA
+            {{ singleMovie.original_language }}
         </h3>
 
         <h3>
-            VOTO
+            {{ singleMovie.vote_average }}
         </h3>
 
     </div>
