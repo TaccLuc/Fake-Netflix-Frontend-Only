@@ -1,10 +1,10 @@
 <script>
+import { store } from '../../store'
 
 export default{
-
   data() {
     return {
-
+        store
     }
   }
 }
@@ -15,7 +15,7 @@ export default{
 
     <div>
         <h3>
-            TITOLO
+            {{ store.movies.title }}
         </h3>
 
         <h3>

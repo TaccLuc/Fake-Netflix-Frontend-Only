@@ -1,9 +1,10 @@
 <script>
+import { store } from '../store'
 
 export default{
   data() {
     return {
-
+        store
     }
   }
 }
@@ -23,9 +24,9 @@ export default{
 
                 <div class="col">
 
-                    <form action="">
+                    <form action="" @submit.prevent="$emit('search')">
 
-                        <input type="text">
+                        <input type="text" v-model="store.title">
 
                         <button>Search</button>
 
