@@ -1,6 +1,10 @@
 <script>
+import SingleMovie from './MainComps/SingleMovie.vue'
 
 export default{
+  components: {
+    SingleMovie
+  },
   data() {
     return {
 
@@ -13,6 +17,16 @@ export default{
 <template>
     <main>
     
+      <div class="container">
+
+        <div class="row justify-content-center">
+
+          <SingleMovie />
+
+        </div>
+
+      </div>
+
     </main>
 </template>
 
