@@ -14,9 +14,6 @@ export default{
       store
     }
   },
-  created() {
-    this.movieFetcher();
-  },
   methods: {
     movieFetcher() {
       axios
