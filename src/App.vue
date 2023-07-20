@@ -23,12 +23,7 @@ export default{
             query: this.store.title
           }})
         .then((response)=> {
-          if (parameter == 'movie') {
-            this.store.movies = response.data.results;
-          } 
-          else {
-            this.store.series = response.data.results;
-          }
+            this.store[parameter] = response.data.results;
         });
       },      
     searcher() {
