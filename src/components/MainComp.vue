@@ -34,19 +34,43 @@ export default{
         </div>
 
         <!-- RESULTS -->
-        <div v-else class="row justify-content-center">
+        <div v-else >
 
-          <SingleMovie 
-            v-for="(singleMovie, i) in store.movie" :key="i"
+          <div class="row mb-5">
+
+            <div class="col-12">
+
+              <h2 v-if="store.movie.length != 0" class="fs-1 fw-bolder mb-3">
+                Movies
+              </h2>
+
+            </div>
+
+            <SingleMovie 
+              v-for="(singleMovie, i) in store.movie" :key="i"
+              :singleMovie="singleMovie"
+              :title="singleMovie.title"
+              :ogTitle="singleMovie.original_title"/>
+
+            </div>
+
+          <div class="row">
+
+            <div class="col-12">
+
+              <h2 v-if="store.tv.length != 0" class="fs-1 fw-bolder mb-3">
+                Series
+              </h2>
+
+            </div>
+
+            <SingleMovie
+            v-for="(singleMovie, i) in store.tv" :key="i"
             :singleMovie="singleMovie"
-            :title="singleMovie.title"
-            :ogTitle="singleMovie.original_title"/>
+            :title="singleMovie.name"
+            :ogTitle="singleMovie.original_name"/>
 
-          <SingleMovie
-          v-for="(singleMovie, i) in store.tv" :key="i"
-          :singleMovie="singleMovie"
-          :title="singleMovie.name"
-          :ogTitle="singleMovie.original_name"/>
+            </div>
 
         </div>
 
