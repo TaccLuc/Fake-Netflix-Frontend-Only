@@ -61,14 +61,12 @@ export default{
 
 <template>
 
-    <div id="singleMovie" class="col-3 position-relative"
-    v-if="singleMovie.length != 0">
+    <div id="singleMovie" class="col-3 position-relative" v-if="singleMovie.length != 0">
         
         <div>
             <img v-if="singleMovie.poster_path != null" :src="`https://image.tmdb.org/t/p/w342${singleMovie.poster_path}`" :alt="title">
 
             <img v-else src="../../assets/img/posternotfound.png" alt="Not Found">
-            
         </div>
         
         <div class="d-flex align-items-end">
@@ -76,15 +74,11 @@ export default{
             <div>
 
                 <h3 id="title">
-
                     {{ title }}
-
                 </h3>
 
                 <h3 v-if="title != ogTitle" id="ogTitle">
-
                     {{ ogTitle }}   
-
                 </h3>
 
                 <h3 id="language">
@@ -92,24 +86,18 @@ export default{
                     <span v-if="lang" :class="`fi fi-${language}`"></span>
 
                     <span v-else>
-
                         {{ singleMovie.original_language }}
-
                     </span>
 
                 </h3>
 
                 <h3 id="rating">
-
                     <i v-for="i in vote" :key="i" class="fa-solid fa-star"></i>
                     <i v-for="j in (5 - vote)" :key="j" class="fa-regular fa-star"></i>
-
                 </h3>
 
                 <h3 id="overview">
-
                     {{ singleMovie.overview }}
-
                 </h3>
 
             </div>

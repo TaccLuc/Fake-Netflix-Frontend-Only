@@ -14,10 +14,7 @@ export default{
     },
     methods: {
         searchDisplay() {
-            this.searchFocus = true;
-        },
-        searchNotDisplay() {
-            this.searchFocus = false;
+            this.searchFocus = !this.searchFocus;
             this.store.title = '';
         }
     }
@@ -38,15 +35,11 @@ export default{
                     <div class="d-flex align-items-center">
 
                         <div id="logoContainer">
-
                             <img src="../assets/img/logo.png" alt="Logo">
-
                         </div>
 
                         <div>
-
                             <Nav />   
-
                         </div>
 
                     </div>
@@ -58,11 +51,9 @@ export default{
 
                         <input type="text" v-model="store.title" 
                         @keyup.enter="$emit('search')"
-                        @blur="searchNotDisplay()"
                         :class="{'active': searchFocus}">
 
-                        <span
-                        @click="searchDisplay()">
+                        <span @click="searchDisplay()">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
 

@@ -19,19 +19,21 @@ export default{
     
       <div class="container">
 
-        <div  id="mainBG" 
-        v-if="store.movies.length == 0 && store.series.length == 0 && store.loaded == false">
+        <!-- MAIN -->
+        <div  id="mainBG" v-if="store.movies.length == 0 && store.series.length == 0 && store.loaded == false">
 
           <img src="../assets/img/main_bg.jpg" alt="Main BG">
 
         </div>
 
+        <!-- ERROR MSG -->
         <div v-else-if="store.movies.length == 0 && store.series.length == 0 && store.loaded == true">
           <h2>
             Search has no results
           </h2>
         </div>
 
+        <!-- RESULTS -->
         <div v-else class="row justify-content-center">
 
           <SingleMovie 
