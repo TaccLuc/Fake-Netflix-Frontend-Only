@@ -53,6 +53,10 @@ export default{
         
             return halfVote;
         }
+    },
+    castSearch() {
+        this.$emit('castSearch', this.singleMovie.id);
+        return this.store.cast;
     }
   }
 }
@@ -100,6 +104,9 @@ export default{
                     {{ singleMovie.overview }}
                 </h3>
 
+                <h3>
+                    {{ castSearch }}
+                </h3>
             </div>
 
         </div>

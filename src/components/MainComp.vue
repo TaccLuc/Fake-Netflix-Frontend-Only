@@ -9,6 +9,11 @@ export default{
     return {
       store
     }
+  },
+  methods: {
+    passValue(argument) {
+      this.$emit('castSearch', argument)
+    }
   }
 }
 
@@ -50,7 +55,8 @@ export default{
               v-for="(singleMovie, i) in store.movie" :key="i"
               :singleMovie="singleMovie"
               :title="singleMovie.title"
-              :ogTitle="singleMovie.original_title"/>
+              :ogTitle="singleMovie.original_title"
+              @castSearch="passValue"/>
 
             </div>
 

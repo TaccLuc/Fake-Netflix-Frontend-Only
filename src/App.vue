@@ -31,6 +31,18 @@ export default{
       this.fetcher('movie')
       this.fetcher('tv')
       this.store.loaded = true;
+    },
+    castFetcher(movieId) {
+
+      axios
+        .get(`https://api.themoviedb.org/3/movie/${movieId}/credits`,{
+          params: {
+            api_key: '8e45067f588e5032df8823d8cceacc66'
+          }
+        })
+        .then((response)=> {
+            console.log(response)
+        });
     }
   }
 }
@@ -42,7 +54,8 @@ export default{
   <HeaderComp
   @search="searcher()" />
 
-  <MainComp />
+  <MainComp 
+  @castSearch="castFetcher"/>
 
 </template>
 
