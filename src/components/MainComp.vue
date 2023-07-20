@@ -10,9 +10,16 @@ export default{
       store
     }
   },
+  props: {
+    castName: Array,
+    tvName: Array
+  },
   methods: {
-    passValue(argument) {
-      this.$emit('castSearch', argument)
+    passValueMovie(argument, index) {
+      this.$emit('castSearch', argument, index, 'movie')
+    },
+    passValueTv(argument, index) {
+      this.$emit('castSearch', argument, index, 'tv')
     }
   }
 }
@@ -56,7 +63,9 @@ export default{
               :singleMovie="singleMovie"
               :title="singleMovie.title"
               :ogTitle="singleMovie.original_title"
-              @castSearch="passValue"/>
+              :castName="castName"
+              :i ="i"
+              @castSearch="passValueMovie"/>
 
             </div>
 
@@ -74,7 +83,10 @@ export default{
             v-for="(singleMovie, i) in store.tv" :key="i"
             :singleMovie="singleMovie"
             :title="singleMovie.name"
-            :ogTitle="singleMovie.original_name"/>
+            :ogTitle="singleMovie.original_name"
+            :castName="tvName"
+            :i ="i"
+            @castSearch="passValueTv"/>
 
             </div>
 

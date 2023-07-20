@@ -11,7 +11,9 @@ export default{
   },
   data() {
     return {
-      store
+      store,
+      castName: [],
+      tvName: []
     }
   },
   methods: {
@@ -27,25 +29,46 @@ export default{
         });
       },      
     searcher() {
+      this.castName = [];
+      this.tvName = [];
       this.store.loaded = false;
       this.fetcher('movie')
       this.fetcher('tv')
       this.store.loaded = true;
     },
-    castFetcher(movieId) {
-
+    castFetcher(movieId, i, parameter) {
       axios
-        .get(`https://api.themoviedb.org/3/movie/${movieId}/credits`,{
+        .get(`https://api.themoviedb.org/3/${parameter}/${movieId}/credits`,{
           params: {
             api_key: '8e45067f588e5032df8823d8cceacc66'
           }
         })
         .then((response)=> {
-            console.log(response)
+          if (parameter == 'movie') {
+            for (let index = 0; index < 3; index++) {
+              if (response.data.cast[index] == undefined) {
+                this.castName.splice((i * 3) + index, 0, '');
+              }
+              else {
+                this.castName.splice((i * 3) + index, 0, response.data.cast[index].name)
+              }
+            }
+          } 
+          else {
+            for (let index = 0; index < 3; index++) {
+              if (response.data.cast[index] == undefined) {
+                this.tvName.splice((i * 3) + index, 0, '');
+              }
+              else {
+                this.tvName.splice((i * 3) + index, 0, response.data.cast[index].name)
+              }
+            }
+          }
         });
     }
   }
 }
+
 
 </script>
 
@@ -55,7 +78,9 @@ export default{
   @search="searcher()" />
 
   <MainComp 
-  @castSearch="castFetcher"/>
+  @castSearch="castFetcher"
+  :castName="castName"
+  :tvName="tvName"/>
 
 </template>
 

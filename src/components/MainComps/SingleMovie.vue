@@ -1,64 +1,72 @@
 <script>
-import { store } from '../../store';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-
 
 export default{
     data() {
-    return {
-        store,
-        lang: true
+        return {
+            lang: true
+        }
+    },
+    props: {
+        singleMovie: Object,
+        title: String,
+        ogTitle: String,
+        i: Number,
+        castName: Array
+    },
+    mounted () {
+        this.castSearch();
+    },
+    methods: {
+        castSearch() {
+            this.$emit('castSearch', this.singleMovie.id, this.i);
+        }
+    },
+    watch: {
+        singleMovie: function() {
+            this.castSearch();
+        }
+    },
+    computed: {
+        language() {
+            const movieLang = this.singleMovie.original_language;
+            if ( movieLang == 'en') {
+                return 'gb';
+            }
+            else if (movieLang == 'ja') {
+                return 'jp';
+            }
+            else if(movieLang == 'it' ||
+            movieLang == 'fr' ||
+            movieLang == 'nl' ||
+            movieLang == 'de' ||
+            movieLang == 'es' ||
+            movieLang == 'vi' ||
+            movieLang == 'no' ||
+            movieLang == 'cn' ||
+            movieLang == 'th' ||
+            movieLang == 'fi' ||
+            movieLang == 'pt' ||
+            movieLang == 'pl' ||
+            movieLang == 'sv' ||
+            movieLang == 'tr' ||
+            movieLang == 'ro' ||
+            movieLang == 'et' ||
+            movieLang == 'ru') {
+                return this.singleMovie.original_language;
+            }
+            else {
+                this.lang = false;
+            }
+        },
+        vote() {
+            if (parseInt(this.singleMovie.vote_average) > 1 || !NaN) {
+                const halfVote = Math.round(parseInt(this.singleMovie.vote_average) / 2);
+            
+                return halfVote;
+            }
+        }
     }
-  },
-  props: {
-      singleMovie: Object,
-      title: String,
-      ogTitle: String
-    },
-  computed: {
-    language() {
-        const movieLang = this.singleMovie.original_language;
-        if ( movieLang == 'en') {
-            return 'gb';
-        }
-        else if (movieLang == 'ja') {
-            return 'jp';
-        }
-        else if(movieLang == 'it' ||
-        movieLang == 'fr' ||
-        movieLang == 'nl' ||
-        movieLang == 'de' ||
-        movieLang == 'es' ||
-        movieLang == 'vi' ||
-        movieLang == 'no' ||
-        movieLang == 'cn' ||
-        movieLang == 'th' ||
-        movieLang == 'fi' ||
-        movieLang == 'pt' ||
-        movieLang == 'pl' ||
-        movieLang == 'sv' ||
-        movieLang == 'tr' ||
-        movieLang == 'ro' ||
-        movieLang == 'et' ||
-        movieLang == 'ru') {
-            return this.singleMovie.original_language;
-        }
-        else {
-            this.lang = false;
-        }
-    },
-    vote() {
-        if (parseInt(this.singleMovie.vote_average) > 1 || !NaN) {
-            const halfVote = Math.round(parseInt(this.singleMovie.vote_average) / 2);
-        
-            return halfVote;
-        }
-    },
-    castSearch() {
-        this.$emit('castSearch', this.singleMovie.id);
-        return this.store.cast;
-    }
-  }
 }
 
 </script>
@@ -104,8 +112,8 @@ export default{
                     {{ singleMovie.overview }}
                 </h3>
 
-                <h3>
-                    {{ castSearch }}
+                <h3 id="cast" v-for="index in 3">
+                    {{ castName[(this.i * 3) + (index - 1)] }}
                 </h3>
             </div>
 
@@ -154,10 +162,8 @@ export default{
         margin-bottom: 10px;
         font-size: 16px;
 
-            &#title,
-            &#ogTitle {
+            &#title {
                 text-transform: capitalize;
-                font-size: 1.2rem;
                 font-weight: bolder;
             }
 
@@ -170,10 +176,16 @@ export default{
             }
             
             &#overview {
-                font-size: 0.8rem;
-                max-height: 200px;
+                font-size: 0.7rem;
+                max-height: 100px;
                 overflow: hidden;
-                padding-bottom: 50px;
+                padding-bottom: 20px;
+            }
+
+            &#cast {
+                font-size: 0.8rem;
+                margin: 0;
+                padding-bottom: 2px;
             }
         }
     }
