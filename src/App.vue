@@ -25,12 +25,10 @@ export default{
             query: this.store.title
           }})
         .then((response)=> {
-            this.store[parameter] = response.data.results;
+          this.store[parameter] = response.data.results;
         });
       },      
     searcher() {
-      this.castName = [];
-      this.tvName = [];
       this.store.loaded = false;
       this.fetcher('movie')
       this.fetcher('tv')
@@ -44,31 +42,20 @@ export default{
           }
         })
         .then((response)=> {
-          if (parameter == 'movie') {
+          const namesArray = response.data.cast;
+          if (namesArray.length > 2) {
+            const actorNames = [];
             for (let index = 0; index < 3; index++) {
-              if (response.data.cast[index] == undefined) {
-                this.castName.splice((i * 3) + index, 0, '');
-              }
-              else {
-                this.castName.splice((i * 3) + index, 0, response.data.cast[index].name)
-              }
+              actorNames.push(namesArray[index].name);
             }
+            this.store[parameter][i].cast = actorNames;
           } 
-          else {
-            for (let index = 0; index < 3; index++) {
-              if (response.data.cast[index] == undefined) {
-                this.tvName.splice((i * 3) + index, 0, '');
-              }
-              else {
-                this.tvName.splice((i * 3) + index, 0, response.data.cast[index].name)
-              }
-            }
-          }
-        });
+          else{
+            this.store[parameter][i].cast;
+          }});
     }
   }
 }
-
 
 </script>
 

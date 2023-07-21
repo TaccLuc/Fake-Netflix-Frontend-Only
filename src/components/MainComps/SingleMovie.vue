@@ -1,9 +1,11 @@
 <script>
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+import { store } from '../../store';
 
 export default{
     data() {
         return {
+            store,
             lang: true
         }
     },
@@ -14,7 +16,7 @@ export default{
         i: Number,
         castName: Array
     },
-    mounted () {
+    mounted() {
         this.castSearch();
     },
     methods: {
@@ -112,9 +114,15 @@ export default{
                     {{ singleMovie.overview }}
                 </h3>
 
-                <h3 id="cast" v-for="index in 3">
-                    {{ castName[(this.i * 3) + (index - 1)] }}
-                </h3>
+                <template v-if="singleMovie.cast != undefined">
+
+                    <h3 id="cast" v-for="index in 3">
+                        {{ singleMovie.cast[index - 1] }}
+                    </h3>
+
+                </template>
+
+
             </div>
 
         </div>
